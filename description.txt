@@ -1,0 +1,11 @@
+Lan's Unlimited Pets is in ALPHA, USE AT YOUR OWN RISK....
+
+The ui is trash I know...No worries...
+
+
+How to use:
+just move pet summoning item into the UI that pops up when holding the item in your cursor.
+
+To remove a pet summoning item, go to your normal pet slot and it show up.
+
+(Open inventory -> Click the "Equipment" chain icon over your accessories)
