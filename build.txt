@@ -1,4 +1,4 @@
 displayName = Lan's Unlimited Pets
 author = Lanboost
-version = 2022.08.01
+version = 2022.08.29
 modReferences = LansUILib
