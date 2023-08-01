@@ -10,7 +10,7 @@ namespace LansUnlimitedPets
 	{
         public override void Load()
         {
-            IL.Terraria.Player.AddBuff_RemoveOldPetBuffsOfMatchingType += DisableRemovalOfPetsAndLightPets;
+            Terraria.IL_Player.AddBuff_RemoveOldPetBuffsOfMatchingType += DisableRemovalOfPetsAndLightPets;
         }
 
         public void DisableRemovalOfPetsAndLightPets(ILContext iLContext)
