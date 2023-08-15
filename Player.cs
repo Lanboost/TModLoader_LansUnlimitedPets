@@ -16,6 +16,7 @@ namespace LansUnlimitedPets
         bool showingUI = false;
 
         LansUILib.ui.LComponent panel;
+        LansUILib.ui.PanelSettings panelSettings = new PanelSettings();
 
         List<LansUILib.ui.LItemSlot> itemSlots = new List<LItemSlot>();
         LItemSlot emptySlot = new LItemSlot(LItemSlotType.PetAndLight);
@@ -23,14 +24,13 @@ namespace LansUnlimitedPets
         public override void Initialize()
         {
             base.Initialize();
+            panelSettings.SetAnchor(LansUILib.ui.AnchorPosition.Center);
+            panelSettings.SetSize(-150, -150, 300, 300);
         }
 
         protected void createPanel()
         {
-            panel = LansUILib.UIFactory.CreatePanel("Unlimited Pets Main", false, false);
-
-            panel.SetAnchor(LansUILib.ui.AnchorPosition.Center);
-            panel.SetSize(-150, -150, 300, 300);
+            panel = LansUILib.UIFactory.CreatePanel("Unlimited Pets Main", panelSettings, true, false);
 
             var inner = new LComponent("Inner");
             inner.isMask = true;
@@ -75,6 +75,11 @@ namespace LansUnlimitedPets
         {
             base.SaveData(tag);
             LansUILib.ui.LItemSlot.Save(tag, "itemData", itemSlots.ToArray());
+            if (panel != null)
+            {
+                LansUILib.UISystem.Instance.Screen.Remove(panel);
+                panel = null;
+            }
         }
 
         public override void PreUpdateBuffs()
@@ -110,11 +115,8 @@ namespace LansUnlimitedPets
                 if (showingUI)
                 {
                     LansUILib.UISystem.Instance.Screen.Remove(panel);
-                }
-                createPanel();
-                
-                if (showingUI)
-                {
+                    panel = null;
+                    createPanel();
                     LansUILib.UISystem.Instance.Screen.Add(panel);
                     panel.Invalidate();
                 }
@@ -126,16 +128,20 @@ namespace LansUnlimitedPets
                 showingUI = newState;
                 if(showingUI)
                 {
-                    if(panel == null)
+                    if(panel != null)
                     {
-                        createPanel();
+                        LansUILib.UISystem.Instance.Screen.Remove(panel);
+                        panel = null;
                     }
+
+                    createPanel();
                     LansUILib.UISystem.Instance.Screen.Add(panel);
                     panel.Invalidate();
                 }
                 else
                 {
                     LansUILib.UISystem.Instance.Screen.Remove(panel);
+                    panel = null;
                 }
             }
 
